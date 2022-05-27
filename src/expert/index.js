@@ -8,6 +8,7 @@ const show = callback => {
         /* const records = session.format_answer(x).split('\n').filter(v => v !== 'false')
         callback(records.map(v => v.split(' ')[2])) */
         const option = session.format_answer(x).split(' ')[2]
+        console.log(option)
         callback(option)
     }
 } 
@@ -15,12 +16,12 @@ const show = callback => {
 const expDir = resolve(__dirname, '..', '..', 'config', 'ex.pl') 
 
 function start({
-    query = 'init(X).',
+    query = 'init(X)',
     callback
 }) {
     session.consult(expDir, {
             success: function() {
-                session.query(query, {
+                session.query(`${query}.`, {
                 success: function() {
                     session.answers(show(callback))
                 }
@@ -36,7 +37,7 @@ const callbackTest = (array) => {
     console.log(array)
 }
 
-module.exports.consult = ({ query = 'init(X).', callback = callbackTest }) => {
+module.exports.consult = ({ query = 'init(X)', callback = callbackTest }) => {
     start({ query, callback })
 }
 

@@ -2,7 +2,7 @@
   "name": "sistema-experto-node",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "text.js",
   "nodemonConfig": {
     "ignore": [
       "test/*",

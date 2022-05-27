@@ -10,13 +10,13 @@ genero(medieval).
 genero(juvenil).
 genero(infantil).
 genero(misterio).
-genero("mini series").
+genero(mini_series).
 genero(zombies).
 genero(vampiros).
 genero(musical).
-genero("juegos de mesa").
-genero("contenido explicito").
-genero("3D").
+genero(juegos_de_mesa).
+genero(contenido_explicito).
+genero(d3d).
 genero(paranormal).
 
 caracteristica("Legacies" , juvenil).
@@ -30,7 +30,7 @@ caracteristica("Dracula", horror).
 caracteristica("It", horror).
 caracteristica("It", misterio).
 
-caracteristica("American horror story", "mini series").
+caracteristica("American horror story", mini_series).
 caracteristica("American horror story", misterio).
 caracteristica("American horror story", horror).
 
@@ -64,11 +64,11 @@ caracteristica("Charly y la fabrica de chocolates", musical).
 
 caracteristica("Jumanji", aventura).
 caracteristica("Jumanji", infantil).
-caracteristica("Jumanji", "juegos de mesa").
+caracteristica("Jumanji", juegos_de_mesa).
 
 caracteristica("Zathura", aventura).
 caracteristica("Zathura", infantil).
-caracteristica("Zathura", "juegos de mesa").
+caracteristica("Zathura", juegos_de_mesa).
 
 caracteristica("Laberinto del fauno", aventura).
 caracteristica("Laberinto del fauno", horror).
@@ -77,12 +77,12 @@ caracteristica("Van helsing", aventura).
 caracteristica("Van helsing", horror).
 caracteristica("Van helsing", vampiros).
 
-caracteristica("Piratas del caribe", aventura).
-caracteristica("Piratas del caribe", piratas).
+caracteristica(piratas_del_caribe, aventura).
+caracteristica(piratas_del_caribe, piratas).
 
 caracteristica("Game of thrones", aventura).
 caracteristica("Game of thrones", medieval).
-caracteristica("Game of thrones", "contenido explicito").
+caracteristica("Game of thrones", contenido_explicito).
 
 caracteristica("Señor de los anillos", aventura).
 caracteristica("Señor de los anillos", medieval).
@@ -108,25 +108,25 @@ caracteristica("El increíble castillo vagabundo", animacion).
 caracteristica("El increíble castillo vagabundo", aventura).
 
 caracteristica("La casa de los sustos", animacion).
-caracteristica("La casa de los sustos", "3D").
+caracteristica("La casa de los sustos", d3d).
 
 caracteristica("Shrek", animacion).
 caracteristica("Shrek", aventura).
-caracteristica("Shrek", "3D").
+caracteristica("Shrek", d3d).
 
 caracteristica("El extraño mundo de jack", animacion).
 caracteristica("El extraño mundo de jack", paranormal).
-caracteristica("El extraño mundo de jack", "3D").
+caracteristica("El extraño mundo de jack", d3d).
 caracteristica("El extraño mundo de jack", musical).
 
 
 caracteristica("El cadaver de la novia", animacion).
 caracteristica("El cadaver de la novia", paranormal).
-caracteristica("El cadaver de la novia", "3D").
+caracteristica("El cadaver de la novia", d3d).
 caracteristica("El cadaver de la novia", musical).
 
 caracteristica("Encanto", musical).
 caracteristica("Encanto", animacion).
-caracteristica("Encanto", "3D").
+caracteristica("Encanto", d3d).
 
-consultar_opciones(Result, Genero) :- caracteristica(Movie,Genero), caracteristica(Movie, Result), not(Genero = Result).
+opciones(Result, Genero) :- caracteristica(Movie,Genero), caracteristica(Movie, Result), (Genero \= Result).
