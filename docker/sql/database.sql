@@ -27,7 +27,7 @@ CREATE TABLE "movie_category" (
 );
 
 CREATE TABLE "preferences" (
-  "id" int PRIMARY KEY,
+  "id" SERIAL PRIMARY KEY,
   "case_id" uuid,
   "category" varchar NOT NULL
 );

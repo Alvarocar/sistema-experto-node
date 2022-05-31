@@ -8,8 +8,7 @@ Preferences.init({
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
-        allowNull: false,
-        autoIncrementIdentity: true
+        autoIncrement: true,
     },
     case_id: {
         type: DataTypes.UUID,

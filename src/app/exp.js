@@ -4,6 +4,7 @@ const { gToken } = require("../util/jwt")
 const Category = require("../domain/category")
 const Preferences = require('../domain/preferences')
 const { sequelize } = require("../domain/client")
+const { QueryTypes } = require('sequelize')
 
 const access = async (id) => {
     try {
@@ -57,23 +58,29 @@ module.exports.giveAnswer = async (
 ) => {
     try {
         await access(options.client_id)
-        await Preferences.create({ case_id: options.case_id, category: options.answer })
+        const p = await Preferences.findOne({ where: { case_id: options.case_id, category: options.answer } })
+        if (!p) {
+            await Preferences.build({ case_id: options.case_id, category: options.answer })
+            .save()
+        }
         const preferencesModel = await Preferences.findAll({ where: { case_id: options.case_id } })
         const preferences = preferencesModel.map(v => v.get({ plain: true }))
-        sequelize.query(`
+        const includes = preferences.map(p => `c.name = '${p.category}'`).join(' or ')
+        const not_includes = preferences.map(p => `c.name != '${p.category}'`).join(' and ')
+        const results = await sequelize.query(`
             Select c.name from category as c
             inner join movie_category as mc on c.id = mc.category_id
             where mc.movie_id in
             (SELECT m.id FROM category as c
             inner join movie_category as mc on c.id = mc.category_id
             inner join movie as m on m.id = mc.movie_id
-            where c.name = 'horror' or c.name = 'zombies' --dinamic
+            where ${includes}
             group by m.id
-            having count(*) >= 2) --dinamic 
+            having count(*) >= ${preferences.length})
             group by c.name
-            having c.name != 'horror' and c.name != 'zombies' --dinamic
-        `)
-        return
+            having ${not_includes}
+        `, { type: QueryTypes.SELECT, raw: true})
+        return results
     } catch(e) {
         throw new Error(e.message)
     }

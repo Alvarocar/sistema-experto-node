@@ -67,8 +67,8 @@ ro.post('/give_answer', (req, res) => {
     const { case_id } = req.query
     const { answer } = req.body
     expService.giveAnswer({ case_id: case_id, answer, client_id: client.id  })
-    .then(() => {
-        res.status(200)
+    .then(result => {
+        res.status(200).json({options: result})
     })
     .catch(e => {
         res.status(400).json({message: e.message})
