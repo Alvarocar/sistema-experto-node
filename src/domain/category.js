@@ -1,5 +1,6 @@
 const { Model, DataTypes } = require('sequelize')
-const sequelize = require('../infra/conection')
+const sequelize = require('../infra/conection');
+const Movie = require('./movie');
 
 class Category extends Model {}
 
@@ -8,7 +9,6 @@ Category.init({
         type: DataTypes.INTEGER,
         primaryKey: true,
         allowNull: false,
-        autoIncrement: true
     },
     name: {
         type: DataTypes.STRING,
@@ -19,5 +19,7 @@ Category.init({
     sequelize,
     tableName: 'category'
 })
+
+
 
 module.exports = Category

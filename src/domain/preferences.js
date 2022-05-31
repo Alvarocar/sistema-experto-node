@@ -27,4 +27,4 @@ Preferences.init({
     tableName: 'preferences'
 })
 
-export default Preferences
+module.exports = Preferences

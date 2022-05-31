@@ -7,7 +7,7 @@ ro.post('/signup', (req, res) => {
     userService.createUser({ fullname, email, password })
     .then(jwt => {
         res.status(201)
-        .json({ token: jwt })
+        .json({ token: jwt, type: 'Bearer' })
     })
     .catch((e) => {
         res.status(400)
@@ -20,7 +20,7 @@ ro.put('/login', (req, res) => {
     userService.getToken({ email, password })
     .then(token => {
         res.status(200)
-        .json({ token })
+        .json({ token, type: 'Bearer' })
     })
     .catch(e => {
         res.status(400)

@@ -3,21 +3,35 @@ init(aventura).
 init(horror).
 init(medieval).
 
-genero(animacion).
 genero(aventura).
+
 genero(horror).
+
 genero(medieval).
+
 genero(juvenil).
+
 genero(infantil).
+
 genero(misterio).
+
 genero(mini_series).
+
 genero(zombies).
+
 genero(vampiros).
+
 genero(musical).
+
 genero(juegos_de_mesa).
+
 genero(contenido_explicito).
+
 genero(d3d).
+
 genero(paranormal).
+
+genero(piratas).
 
 caracteristica("Legacies" , juvenil).
 
@@ -47,7 +61,6 @@ caracteristica("Diario de vampiros", vampiros).
 
 caracteristica("Teen wolf", horror).
 caracteristica("Teen wolf", juvenil).
-caracteristica("Teen wolf", horror).
 
 caracteristica("Una serie de eventos desafortunados", aventura).
 caracteristica("Harry Potter", aventura).

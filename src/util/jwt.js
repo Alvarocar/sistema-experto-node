@@ -8,5 +8,13 @@ const { secret } = require('../infra/config')
  * @returns {string} JsonWebToken
  */
 module.exports.gToken = (obj) => {
-    return jwt.sign(obj, secret, { expiresIn: '1h' })
+    return jwt.sign(obj, secret, { expiresIn: '10h', algorithm: 'HS256' })
+}
+
+module.exports.decryptToken = (token) => {
+    return jwt.decode(token, { json: true })
+}
+
+module.exports.getSecret = () => {
+    return secret
 }

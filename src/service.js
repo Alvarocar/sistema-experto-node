@@ -20,6 +20,7 @@ module.exports.query = (answers, callback) => {
 
 module.exports.findMovie = (answers, callback) => {
    const query = answers.map(v => `caracteristica(X, ${v})`).join(',')
+   console.log(query)
    exp.consult({
     query,
     callback

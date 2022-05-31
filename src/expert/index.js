@@ -15,6 +15,7 @@ const show = callback => {
 
 const expDir = resolve(__dirname, '..', '..', 'config', 'ex.pl') 
 
+
 function start({
     query = 'init(X)',
     callback
@@ -27,8 +28,8 @@ function start({
                 }
             })
         },
-        error: function() {
-
+        error: function(e) {
+            console.error(e)
         }
     })
 }

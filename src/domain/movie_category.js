@@ -9,8 +9,7 @@ MovieCategory.init({
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
-        allowNull: false,
-        autoIncrement: true
+        allowNull: false
     },
     movie_id: {
         type: DataTypes.INTEGER,

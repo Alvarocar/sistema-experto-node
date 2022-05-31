@@ -1,6 +1,8 @@
-const { Router } = require('express')
+const { Router, response } = require('express')
 const service = require('./service')
 const ro = Router()
+const jwt = require('./util/jwt')
+const expService = require('./app/exp')
 
 ro.put('/', async (req, res) => {
     const { answers } = req.body
@@ -30,5 +32,48 @@ ro.put('/ask', (req, res) => {
     })
 })
 
+ro.post('/create_case',  (req, res) => {
+    const { authorization } = req.headers
+    const [, auth] = authorization.split(' ')
+    const client = jwt.decryptToken(auth)
+    expService.createCase(client.id)
+    .then(result => {
+        res.status(201)
+        .json(result)
+    })
+    .catch(e => {
+        res.status(400)
+        .json({ message: e.message })
+    })
+})
+
+ro.get('/start_exp', (req, res) => {
+    const { authorization } = req.headers
+    const [, auth] = authorization.split(' ')
+    const client = jwt.decryptToken(auth)
+    expService.start(client.id)
+    .then(result => {
+        res.status(200).json(result)
+    })
+    .catch(e => {
+        res.status(400).json({message: e.message})
+    })
+})
+
+ro.post('/give_answer', (req, res) => {
+    const { authorization } = req.headers
+    const [, auth] = authorization.split(' ')
+    const client = jwt.decryptToken(auth)
+    const { case_id } = req.query
+    const { answer } = req.body
+    expService.giveAnswer({ case_id: case_id, answer, client_id: client.id  })
+    .then(() => {
+        res.status(200)
+    })
+    .catch(e => {
+        res.status(400).json({message: e.message})
+    })
+
+})
 
 module.exports = ro
