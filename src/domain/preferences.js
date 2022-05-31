@@ -17,9 +17,14 @@ Preferences.init({
             model: Case,
             key: 'id'
         }
+    },
+    category: {
+        type: DataTypes.STRING,
+        allowNull: false,
     }
 }, {
     sequelize,
+    tableName: 'preferences'
 })
 
 export default Preferences

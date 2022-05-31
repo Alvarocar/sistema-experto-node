@@ -8,11 +8,13 @@ const sequelize = new Sequelize({
    host: 'localhost',
    port: 3535,
    define: {
-       freezeTableName: true
-   }
+       freezeTableName: true,
+       timestamps: false
+   },
+
 })
 
-(function testConnection() {
+function testConnection() {
     sequelize.authenticate()
     .then(() => {
         console.info(`Connection has been established`)
@@ -20,6 +22,8 @@ const sequelize = new Sequelize({
     .catch(() => {
         console.error(`Unable to connect to the database`, error)
     })
-})()
+}
 
-export default sequelize
+testConnection()
+
+module.exports = sequelize

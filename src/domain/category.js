@@ -17,6 +17,7 @@ Category.init({
 
 }, {
     sequelize,
+    tableName: 'category'
 })
 
 module.exports = Category

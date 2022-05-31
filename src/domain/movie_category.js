@@ -29,6 +29,7 @@ MovieCategory.init({
 
 }, {
     sequelize,
+    tableName: 'movie_category'
 })
 
 module.exports = MovieCategory

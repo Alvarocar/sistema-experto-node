@@ -17,6 +17,7 @@ Movie.init({
 
 }, {
     sequelize,
+    tableName: 'movie',
 })
 
 module.exports = Movie

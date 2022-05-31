@@ -21,6 +21,7 @@ Case.init({
 
 }, {
     sequelize,
+    tableName: 'case'
 })
 
 module.exports = Case

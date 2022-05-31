@@ -24,6 +24,7 @@ Client.init({
     }
 }, {
     sequelize,
+    tableName: 'client'
 })
 
 module.exports = Client

@@ -29,6 +29,7 @@ Suggest.init({
 
 }, {
     sequelize,
+    tableName: 'suggest',
 })
 
 module.exports = Suggest
