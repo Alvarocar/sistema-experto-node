@@ -76,4 +76,18 @@ ro.post('/give_answer', (req, res) => {
 
 })
 
+ro.get('/suggest', (req, res) => {
+    const { authorization } = req.headers
+    const [, auth] = authorization.split(' ')
+    const client = jwt.decryptToken(auth)
+    const { case_id } = req.query
+    expService.suggest({ case_id: case_id, client_id: client.id  })
+    .then(result => {
+        res.status(200).json({movies: result})
+    })
+    .catch(e => {
+        res.status(400).json({message: e.message})
+    })
+})
+
 module.exports = ro

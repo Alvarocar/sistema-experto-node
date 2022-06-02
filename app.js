@@ -23,5 +23,5 @@ app.use((err, _, res, next) => {
 
 app.use('/api/user', userRouter)
 
-app.listen(8080, () => 
-{console.info(`Starting in port number: ${8080}`)})
+app.listen(3000, () => 
+{console.info(`Starting in port number: ${3000}`)})

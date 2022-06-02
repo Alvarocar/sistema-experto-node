@@ -85,3 +85,26 @@ module.exports.giveAnswer = async (
         throw new Error(e.message)
     }
 }
+
+module.exports.suggest = async (
+    options = { case_id: '', client_id: '' }
+) => {
+    try {
+        const preferencesModel = await Preferences.findAll({ where: { case_id: options.case_id } })
+        const preferences = preferencesModel.map(v => v.get({ plain: true }))
+        const includes = preferences.map(p => `c.name = '${p.category}'`).join(' or ')
+        const result = await sequelize.query(`
+        SELECT m.name FROM movie as m
+        INNER JOIN movie_category as mc ON mc.movie_id = m.id
+        INNER JOIN category as c ON c.id = mc.category_id
+        where ${includes} --dinamic
+        group by m.name
+        having count(*) >= ${preferencesModel.length} --dinamic
+        `, { type: QueryTypes.SELECT, raw: true })
+
+        return result
+    } catch (error) {
+        console.error(error)
+        throw new Error('Algo salio mal')
+    }
+}
